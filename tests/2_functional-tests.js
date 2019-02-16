@@ -121,12 +121,14 @@ suite('Functional Tests', function() {
        chai.request(server)
         .put('/travellers')
         /** send {surname: 'Colombo'} here **/
-        // .send({...})
+        .send({surname : 'Colombo'})
         .end(function(err, res){
           
-          /** your tests here **/
-          assert.fail(); // remove this after adding tests
-          
+          /** my tests here **/
+          assert.equal(res.status, 200,'response should be 200');
+          assert.equal(res.type, 'application/json','should return json type');
+          assert.equal(res.body.name, 'Cristoforo', ' name should be Cristoforo');
+          assert.equal(res.body.surname, 'Colombo', 'surname should be Colombo');
           done(); // Never forget the 'done()' callback...
         });
       });
